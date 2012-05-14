@@ -89,3 +89,5 @@ inoremap <C-f> <Right>
 inoremap <C-b> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
+
+set tags=/home/gree/tags
