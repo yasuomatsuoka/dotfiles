@@ -141,10 +141,6 @@ compinit
 #
 setopt complete_aliases # aliased ls needs if file/dir completions work
 
-# cd をしたときにlsを実行する
-# 
-chpwd() { ls }
-
 # aliases
 #
 alias where="command -v"
@@ -169,6 +165,10 @@ linux*)
   alias ls="ls --color -F"
   ;;
 esac
+
+# cd をしたときにlsを実行する
+# 
+chpwd() { ls }
 
 ## terminal configuration
 #
