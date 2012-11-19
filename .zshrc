@@ -1,3 +1,8 @@
+export PATH=~/proton/src/server/node_modules/.bin:~/bin:/usr/local/bin:$PATH:
+source ~/.nvm/nvm.sh
+export PATH=$PATH:/home/gree/common/php/bin
+export PATH=$PATH:~/proton/src/server/node_modules/coffee-script/bin/
+
 #android
 #export PATH=~/android-sdk-mac/tools:~/android-sdk-mac/platform-tools:/usr/local/bin:/opt/local/bin:/opt/local/sbin/:$PATH
 
@@ -217,5 +222,4 @@ preexec () {
 }
 
 ## load user .zshrc configuration file
-#
 [ -f ~/.zshrc.mine ] && source ~/.zshrc.mine
