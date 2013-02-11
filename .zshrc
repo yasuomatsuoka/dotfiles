@@ -156,10 +156,10 @@ alias du="du -h"
 alias df="df -h"
 alias su="su -l"
 alias rm="rm -i"
-#alias mysql="/Applications/MAMP/Library/bin/mysql"
-#alias myssh="ssh ysomtok.mydns.jp"
+alias vi="vim"
 alias mysqlstart="mysql.server start"
 alias mysqlstop="mysql.server stop"
+alias svn="/usr/local/bin/svn"
 
 case "${OSTYPE}" in
 freebsd*|darwin*)
