@@ -1,20 +1,20 @@
 " encoding
 set enc=utf-8
 set fenc=utf-8
-set fencs=iso-2022-jp,utf-8,euc-jp,cp932
+set fencs=utf-8,euc-jp,cp932,iso-2022-jp
 
 
 " basic
 set backspace=indent,eol,start
 set nobackup " バックアップ取らない
 set autoread " 他で書き換えられたら自動で読み直す
-set whichwrap=b,s,h,l,<,>,[,]  " カーソルを行頭、行末で止まらないようにする
 set vb t_vb= " ビープをならさない
-set autoindent "改行で自動インデント
+set autoindent " 改行で自動インデント
 set statusline=%F%M%R%=code:%B%H%W "ステータスライン
 
 
 " display
+syntax on
 colorscheme desert
 set wrap " 行末で折り返し
 set showmatch " 括弧の対応をハイライト
@@ -30,18 +30,14 @@ augroup END
 hi clear CursorLine
 hi CursorLine gui=underline
 highlight CursorLine ctermbg=black guibg=black
-" 不可視文字の表示
-set list
+" 不可視文字のフォーマット
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
-
 
 " tab
 set tabstop=4 "表示時のスペース量
 set softtabstop=4 " 入力時のスペース量
 set shiftwidth=4 " 自動インデント幅
 set expandtab " タブをスペースに展開
-" syntax color
-syntax on
 
 
 " serach
@@ -63,21 +59,18 @@ if has('vim_starting')
   call neobundle#rc(expand('~/.vim/bundle/'))
 endif
 " originalrepos on github
+NeoBundle 'L9'
 NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimproc' " vimshell を非同期に使うために必要
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'jpalardy/vim-slime'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'L9'
+NeoBundle 'scrooloose/syntastic' " 保存時にシンタックスチェック
 NeoBundle 'FuzzyFinder'
-NeoBundle 'errormarker.vim'
-NeoBundle 'sifue/smarty.vim'
+NeoBundle 'errormarker.vim' 
 
 filetype plugin indent on " required!
 filetype indent on
-syntax on
-
 
 " keymapping
 " emacs like keymap
@@ -94,13 +87,19 @@ nnoremap <C-[> :pop<CR>
 nnoremap <silent> ff :FufFile <C-r>=expand('%:~:.')[:-1-len(expand('%:~:.:t'))]<CR><CR>
 nnoremap <silent> fb :<C-u>:FufBuffer!<CR>
 
+" カーソルを行頭、行末で止まらないようにする
+set whichwrap=b,s,h,l,<,>,[,]
+
 
 " neocomplcache
-let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
+" 起動時に有効化
+let g:neocomplcache_enable_at_startup = 1
 
 
-" ctags
-set tags=/home/gree/tags
+" in office
+if filereadable(expand('~/.vimrc.office'))
+  source ~/.vimrc.office
+endif
 
 
 " for coffeescript
