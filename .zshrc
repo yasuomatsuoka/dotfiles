@@ -1,18 +1,3 @@
-export PATH=~/proton/src/server/node_modules/.bin:~/bin:/usr/local/bin:$PATH:
-source ~/.nvm/nvm.sh
-export PATH=$PATH:/home/gree/common/php/bin
-export PATH=$PATH:~/proton/src/server/node_modules/coffee-script/bin/
-
-#android
-#export PATH=~/android-sdk-mac/tools:~/android-sdk-mac/platform-tools:/usr/local/bin:/opt/local/bin:/opt/local/sbin/:$PATH
-
-#python
-#export WORKON_HOME=$HOME/.virtualenvs
-#source /usr/local/bin/virtualenvwrapper.sh 
-
-#export PATH=/usr/local/bin:/opt/local/bin:/opt/local/sbin/:$PATH
-#export MANPATH=/opt/local/man:$MANPATH
-
 ## Environment variable configuration
 #
 # LANG
@@ -242,4 +227,5 @@ preexec () {
 }
 
 ## load user .zshrc configuration file
-[ -f ~/.zshrc.mine ] && source ~/.zshrc.mine
+[ -f ~/.zshrc.home ] && source ~/.zshrc.home
+[ -f ~/.zshrc.office ] && source ~/.zshrc.office
