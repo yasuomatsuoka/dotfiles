@@ -13,25 +13,6 @@ set autoindent " 改行で自動インデント
 set statusline=%F%M%R%=code:%B%H%W "ステータスライン
 
 
-" display
-syntax on
-colorscheme desert
-set wrap " 行末で折り返し
-set showmatch " 括弧の対応をハイライト
-" 全角スペースの表示
-highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
-match ZenkakuSpace /　/
-" カレントウィンドウにのみ罫線を引く
-augroup cch
-  autocmd! cch
-  autocmd WinLeave * set nocursorline
-  autocmd WinEnter,BufRead * set cursorline
-augroup END
-hi clear CursorLine
-hi CursorLine gui=underline
-highlight CursorLine ctermbg=black guibg=black
-" 不可視文字のフォーマット
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 
 " tab
 set tabstop=4 "表示時のスペース量
@@ -86,6 +67,9 @@ nnoremap <C-[> :pop<CR>
 " fuzzyfinder.vim
 nnoremap <silent> ff :FufFile <C-r>=expand('%:~:.')[:-1-len(expand('%:~:.:t'))]<CR><CR>
 nnoremap <silent> fb :<C-u>:FufBuffer!<CR>
+" tab control
+nnoremap <S-Tab> gt
+nnoremap <Tab><Tab> gT
 
 " カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,<,>,[,]
@@ -96,6 +80,25 @@ set whichwrap=b,s,h,l,<,>,[,]
 let g:neocomplcache_enable_at_startup = 1
 
 
+" display
+syntax on
+colorscheme desert
+set wrap " 行末で折り返し
+set showmatch " 括弧の対応をハイライト
+" 全角スペースの表示
+highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+match ZenkakuSpace /　/
+" カレントウィンドウにのみ罫線を引く
+augroup cch
+  autocmd! cch
+  autocmd WinLeave * set nocursorline
+  autocmd WinEnter,BufRead * set cursorline
+augroup END
+hi clear CursorLine
+hi CursorLine gui=underline
+highlight CursorLine ctermbg=black guibg=black
+" 不可視文字のフォーマット
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 " in office
 if filereadable(expand('~/.vimrc.office'))
   source ~/.vimrc.office
