@@ -33,17 +33,15 @@ endif
 " originalrepos on github
 NeoBundle 'L9'
 NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc' "for vimshell
-NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/vimproc' "for vimshell and vim-quickrun
 NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'jpalardy/vim-slime'
+NeoBundle 'Shougo/neosnippet'
 NeoBundle 'scrooloose/syntastic' " syntax check at save
 NeoBundle 'FuzzyFinder'
-NeoBundle 'errormarker.vim' 
 NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'thinca/vim-quickrun'
-
-filetype plugin indent on " required !
+NeoBundle 'thinca/vim-quickrun' " \r 
+NeoBundle 'surround.vim'
+filetype plugin indent on
 filetype indent on
 
 " ctrlp setting
@@ -53,9 +51,11 @@ let g:ctrlp_mruf_max            = 500
 let g:ctrlp_open_new_file       = 1
 
 
-" neocomplcache
+" neocomplcache and neosnippet
 " enable in start
 let g:neocomplcache_enable_at_startup = 1
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
 
 
 " keymapping
@@ -63,8 +63,8 @@ let g:neocomplcache_enable_at_startup = 1
 inoremap <C-d> <Delete>
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
+" inoremap <C-j> <Down>
+" inoremap <C-k> <Up> "diable for neosnippet
 " escape hilight
 noremap <ESC><ESC> :nohlsearch<CR><ESC>
 " pop for ctag
@@ -72,9 +72,6 @@ nnoremap <C-[> :pop<CR>
 " fuzzyfinder.vim
 nnoremap <silent> ff :FufFile <C-r>=expand('%:~:.')[:-1-len(expand('%:~:.:t'))]<CR><CR>
 nnoremap <silent> fb :<C-u>:FufBuffer!<CR>
-" tab control
-nnoremap <S-Tab> gt
-nnoremap <Tab><Tab> gT
 
 
 " set tab
@@ -141,7 +138,7 @@ hi CursorLine cterm=underline gui=underline
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 " do not stop BOL and EOL
 set whichwrap=b,s,h,l,<,>,[,]
-" tab
+" tab setting
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
