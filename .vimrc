@@ -41,6 +41,7 @@ NeoBundle 'FuzzyFinder'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'thinca/vim-quickrun' " \r 
 NeoBundle 'surround.vim'
+NeoBundle "tpope/vim-fugitive"
 filetype plugin indent on
 filetype indent on
 
