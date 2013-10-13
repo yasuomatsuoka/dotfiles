@@ -43,6 +43,7 @@ NeoBundle 'thinca/vim-quickrun' " \r
 NeoBundle 'surround.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'derekwyatt/vim-scala'
 filetype plugin indent on
 filetype indent on
 
@@ -155,4 +156,10 @@ au BufNewFile,BufRead *.html set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 " in office
 if filereadable(expand('~/.vimrc.office'))
   source ~/.vimrc.office
+endif
+
+
+" in sakura vps
+if filereadable(expand('~/.vimrc.sakura'))
+  source ~/.vimrc.sakura
 endif
