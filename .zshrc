@@ -4,7 +4,6 @@
 #
 export LANG=ja_JP.UTF-8
 
-
 ## Default shell configuratioe
 #
 # set prompt
@@ -54,22 +53,14 @@ case ${UID} in
     PROMPT="%{${fg[white]}%}${HOST%%.*} ${PROMPT}"
   ;;
 *)
-  #PROMPT="%{${fg[red]}%}%/%%%{${reset_color}%} "
-  #PROMPT="%m:%n%% "
   PROMPT="%m%% " 
    
-  #PROMPT2="%{${fg[red]}%}%_%%%{${reset_color}%} "
-  #RPROMPT="[%~]"
   RPROMPT='[`rprompt-git-current-branch`%~]'
   SPROMPT="%r is correct? [n,y,a,e]:%{${reset_color}%} "
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
     PROMPT="%{${fg[white]}%}${HOST%%.*} ${PROMPT}"
   ;;
 esac
-
-#PROMPT="%m:%n%% "
-#RPROMPT="[%~]"
-#SPROMPT="correct: %R -> %r ? " 
 
 #enter で ls と git status
 function do_enter() {
@@ -91,6 +82,9 @@ function do_enter() {
 }
 zle -N do_enter
 bindkey '^m' do_enter
+
+# 大文字・小文字を区別しないで補完出来るようにするが、大文字を入力した場合は区別する
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 # ファイル名だけで展開
 function extract() {
