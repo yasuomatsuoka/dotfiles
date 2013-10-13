@@ -245,5 +245,5 @@ preexec () {
 }
 
 ## load user .zshrc configuration file
-[ -f ~/.zshrc.home ] && source ~/.zshrc.home
+[ -f ~/.zshrc.mac ] && source ~/.zshrc.mac
 [ -f ~/.zshrc.office ] && source ~/.zshrc.office
