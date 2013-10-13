@@ -24,12 +24,15 @@ set wildmenu " enhance command-completion
 
 
 " neobundle
+" http://vim-users.jp/2011/10/hack238/
 set nocompatible " be iMproved
 filetype off
+
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
   call neobundle#rc(expand('~/.vim/bundle/'))
 endif
+
 " originalrepos on github
 NeoBundle 'L9'
 NeoBundle 'Shougo/neobundle.vim'
@@ -44,7 +47,8 @@ NeoBundle 'surround.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'derekwyatt/vim-scala'
-filetype plugin indent on
+
+filetype plugin on
 filetype indent on
 
 " ctrlp setting
@@ -104,6 +108,7 @@ endfunction "}}}
 let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 set showtabline=2 " show tabline everytime
 
+" tab setting
 " the prefix key.
 nnoremap    [Tag]   <Nop>
 nmap    t [Tag]
