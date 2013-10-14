@@ -4,13 +4,10 @@
 #
 export LANG=ja_JP.UTF-8
 
+
 ## Default shell configuratioe
 #
 # set prompt
-#
-#autoload colors
-#colors
-
 # ${fg[...]} や $reset_color をロード
 autoload -U colors; colors
 
@@ -46,19 +43,19 @@ setopt prompt_subst
 
 case ${UID} in
 0)
+  # root
   PROMPT="%B%{${fg[red]}%}%/#%{${reset_color}%}%b "
-  PROMPT2="%B%{${fg[red]}%}%_#%{${reset_color}%}%b "
   SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
     PROMPT="%{${fg[white]}%}${HOST%%.*} ${PROMPT}"
   ;;
 *)
+  # norman user
   PROMPT="%m%% " 
-   
   RPROMPT='[`rprompt-git-current-branch`%~]'
   SPROMPT="%r is correct? [n,y,a,e]:%{${reset_color}%} "
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-    PROMPT="%{${fg[white]}%}${HOST%%.*} ${PROMPT}"
+    PROMPT="%{${fg[white]}%}%n ${HOST%%.*}%% "
   ;;
 esac
 
@@ -240,4 +237,4 @@ preexec () {
 
 ## load user .zshrc configuration file
 [ -f ~/.zshrc.mac ] && source ~/.zshrc.mac
-[ -f ~/.zshrc.office ] && source ~/.zshrc.office
+[ -f ~/.zshrc.mine ] && source ~/.zshrc.mine
