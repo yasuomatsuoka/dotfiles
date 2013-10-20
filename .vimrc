@@ -45,7 +45,6 @@ NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'thinca/vim-quickrun' " \r 
 NeoBundle 'surround.vim'
 NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'derekwyatt/vim-scala'
 
 filetype plugin on
