@@ -236,5 +236,5 @@ preexec () {
 }
 
 ## load user .zshrc configuration file
-[ -f ~/.zshrc.mac ] && source ~/.zshrc.mac
 [ -f ~/.zshrc.mine ] && source ~/.zshrc.mine
+[ -f ~/.zshrc.mac ] && source ~/.zshrc.mac

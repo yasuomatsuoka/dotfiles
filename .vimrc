@@ -157,13 +157,12 @@ au BufNewFile,BufRead *.coffee set tabstop=2 softtabstop=2 shiftwidth=2 expandta
 au BufNewFile,BufRead *.html set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 
-" in office
-if filereadable(expand('~/.vimrc.office'))
-  source ~/.vimrc.office
+" local setting
+if filereadable(expand('~/.vimrc.mine'))
+  source ~/.vimrc.mine
 endif
 
-
-" in sakura vps
-if filereadable(expand('~/.vimrc.sakura'))
-  source ~/.vimrc.sakura
+" mac setting
+if filereadable(expand('~/.vimrc.mac'))
+  source ~/.vimrc.mac
 endif
