@@ -46,6 +46,7 @@ NeoBundle 'thinca/vim-quickrun' " \r
 NeoBundle 'surround.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'derekwyatt/vim-scala'
+NeoBundle 'Align'
 
 filetype plugin on
 filetype indent on
