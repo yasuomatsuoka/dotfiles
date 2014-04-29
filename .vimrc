@@ -133,6 +133,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'Align'
+NeoBundle 'leafgarland/typescript-vim'
 
 filetype plugin on
 filetype indent on
