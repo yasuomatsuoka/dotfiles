@@ -153,7 +153,7 @@ setopt share_history # share command history data
 ## Completion configuration
 #
 autoload -U compinit
-compinit
+compinit -u
 
 ## Alias configuration
 #
