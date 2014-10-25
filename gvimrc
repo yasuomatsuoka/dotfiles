@@ -1,14 +1,14 @@
  if has('gui_macvim')
-	set guifont=Monaco:h16
+    set guifont=Monaco:h16
     colorscheme torte
     set transparency=25	" 透明度を指定
-	set antialias " アンチエイリアシング
-	set guioptions-=T " ツールバー削除
+    set antialias " アンチエイリアシング
+    set guioptions-=T " ツールバー削除
 endif
 
 :set columns=100 " 画面上の列幅を設定する
 :set lines=40 " 画面上の行数
-:set columns=120 " 画面上の列数  
+:set columns=120 " 画面上の列数
 :set cmdheight=2 " コマンドラインに使われる画面上の行数
 
 " いつタブページのラベルを表示するかを指定する

@@ -6,7 +6,7 @@ set fencs=utf-8,euc-jp,iso-2022-jp
 set backspace=indent,eol,start
 set nobackup
 set autoread
-set vb t_vb= 
+set vb t_vb=
 set autoindent
 set statusline=%F%M%R%=code:%B%H%W
 set wildmenu " enhance command-completion
@@ -111,31 +111,47 @@ set hlsearch
 
 
 " neobundle {{{
-" http://vim-users.jp/2011/10/hack238/
-set nocompatible " be iMproved
-filetype off
+" https://github.com/Shougo/neobundle.vim
+if !1 | finish | endif
 
 if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim
-  call neobundle#rc(expand('~/.vim/bundle/'))
+  set nocompatible " be iMproved
+
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
+
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
 
 " originalrepos on github
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim' " Unite file_mru
-NeoBundle 'Shougo/vimproc' " for vimshell and vim-quickrun
+
+NeoBundle 'Shougo/vimproc.vim', {
+ \ 'build' : {
+ \     'windows' : 'tools\\update-dll-mingw',
+ \     'cygwin' : 'make -f make_cygwin.mak',
+ \     'mac' : 'make -f make_mac.mak',
+ \     'linux' : 'make',
+ \     'unix' : 'gmake',
+ \    },
+ \ }
+
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'scrooloose/syntastic' " syntax check at save
-NeoBundle 'thinca/vim-quickrun' " \r 
+NeoBundle 'thinca/vim-quickrun' " \r
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'Align'
 NeoBundle 'leafgarland/typescript-vim'
 
-filetype plugin on
+call neobundle#end()
 filetype indent on
 " }}}
 

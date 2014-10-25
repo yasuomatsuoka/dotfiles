@@ -51,7 +51,7 @@ case ${UID} in
   ;;
 *)
   # norman user
-  PROMPT="%m%% " 
+  PROMPT="%m%% "
   RPROMPT='[`rprompt-git-current-branch`%~]'
   SPROMPT="%r is correct? [n,y,a,e]:%{${reset_color}%} "
   [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
@@ -152,7 +152,11 @@ setopt share_history # share command history data
 
 ## Completion configuration
 #
-autoload -U compinit
+# for zsh-completions
+# https://github.com/zsh-users/zsh-completions
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+autoload -Uz compinit
 compinit -u
 
 ## Alias configuration
@@ -186,7 +190,7 @@ linux*)
 esac
 
 # cd をしたときにlsを実行する
-# 
+#
 chpwd() { ls }
 
 ## terminal configuration
@@ -232,7 +236,7 @@ kterm*|xterm*)
 esac
 
 preexec () {
-  [ ${STY} ] && echo -ne "\ek${1%% *}\e\\"  
+  [ ${STY} ] && echo -ne "\ek${1%% *}\e\\"
 }
 
 ## load user .zshrc configuration file
