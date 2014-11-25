@@ -150,6 +150,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'Align'
 NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'evidens/vim-twig'
 
 call neobundle#end()
 filetype indent on
