@@ -182,7 +182,8 @@ alias svn="/usr/local/bin/svn"
 case "${OSTYPE}" in
 freebsd*|darwin*)
   alias ls="ls -G -w -F"
-  function vim() {command /Applications/MacVim.app/Contents/MacOS/MacVim --remote-tab-silent $@ & }
+  alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+  alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
   ;;
 linux*)
   alias ls="ls --color -F"
