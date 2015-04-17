@@ -1,3 +1,7 @@
+"------------------------------------
+"" vim basic
+"------------------------------------
+
 " basic {{{
 set enc=utf-8
 set fenc=utf-8
@@ -108,6 +112,9 @@ set noignorecase " ignore case-sensitivity
 set smartcase " if BOL is a capital letter, enable case-sensitivity
 set hlsearch
 " }}}
+
+" do not create buckup files
+set noundofile
 
 
 " neobundle {{{
