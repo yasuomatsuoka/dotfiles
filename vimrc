@@ -152,6 +152,8 @@ NeoBundle 'Align'
 NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'evidens/vim-twig'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'AtsushiM/sass-compile.vim'
 
 call neobundle#end()
 filetype indent on
@@ -227,6 +229,18 @@ au BufNewFile,BufRead *.coffee set tabstop=2 softtabstop=2 shiftwidth=2 expandta
 au BufNewFile,BufRead *.html set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 " }}}
 
+" scrooloose/syntastic
+" http://superbrothers.hatenablog.com/entry/2012/03/04/155645
+let g:syntastic_mode_map = { 'mode': 'passive',
+                           \ 'active_filetypes': ['javascript'],
+                           \ 'passive_filetypes': [] }
+
+let g:syntastic_javascript_jslint_conf = "--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars"
+
+" AtsushiM/sass-compile.vim
+""{{{
+let g:sass_compile_auto = 0 " do not auto compile
+"}}}
 
 " mac setting {{{
 if filereadable(expand('~/.vimrc.mac'))
