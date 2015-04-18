@@ -1,45 +1,50 @@
 "------------------------------------
-"" vim basic
+"" 基本
 "------------------------------------
-
-" basic {{{
+" 基本
 set enc=utf-8
 set fenc=utf-8
 set fencs=utf-8,euc-jp,iso-2022-jp
-
 set backspace=indent,eol,start
-set nobackup
-set autoread
 set vb t_vb=
 set autoindent
+set nobackup
+set noundofile
 set statusline=%F%M%R%=code:%B%H%W
-set wildmenu " enhance command-completion
-" }}}
+set autoread " ファイルに変更があった場合に再読み込みされる。頻度はひくい
+set wildmenu " ファイル名補完
+set whichwrap=b,s,h,l,<,>,[,] " 行末から行頭に移動できるように
 
 
-" basic keymapping {{{
-" emacs like keymap
+"------------------------------------
+"" kyemapping
+"------------------------------------
+" emacs風keymapping
 inoremap <C-d> <Delete>
 inoremap <C-f> <Right>
 inoremap <C-b> <Left>
-" escape hilight
+
+" ハイライトを消すkeymapping
 noremap <ESC><ESC> :nohlsearch<CR><ESC>
-" pop for ctag
+
+" ctagのpop
 nnoremap <C-[> :pop<CR>
-" }}}
 
 
-" tab {{{
+"------------------------------------
+"" タブ
+"------------------------------------
 " anywhere SID
 function! s:SID_PREFIX()
   return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
 endfunction
-" set tabline
+
+" タブ表示をどうするか
 function! s:my_tabline()  "{{{
   let s = ''
   for i in range(1, tabpagenr('$'))
     let bufnrs = tabpagebuflist(i)
-    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
+    let bufnr = bufnrs[tabpagewinnr(i) - 1]  " 最初の見た目
     let no = i  " display 0-origin tabpagenr.
     let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
     let title = fnamemodify(bufname(bufnr), ':t')
@@ -56,7 +61,7 @@ endfunction "}}}
 let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 set showtabline=2 " show tabline everytime
 
-" tab keymapping
+" タブのkeymapping
 " the prefix key.
 nnoremap    [Tag]   <Nop>
 nmap    t [Tag]
@@ -72,20 +77,23 @@ map <silent> [Tag]x :tabclose<CR>
 map <silent> [Tag]n :tabnext<CR>
 " tp previous tab
 map <silent> [Tag]p :tabprevious<CR>
-" }}}
 
 
-" display {{{
+"------------------------------------
+"" 見た目
+"------------------------------------
+" 基本
 syntax on
 colorscheme desert
-set wrap " return eol
-set showmatch " hilight bracket
+set wrap " 行末で折り返す
+set showmatch " 対応するかっこを光らせる
 
-" show zenkaku
+" 見えない文字を見えるように
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 highlight ZenkakuSpace ctermfg=lightblue guibg=darkgray
 match ZenkakuSpace /　/
 
-" show underline in current window
+" フォーカスがあたっているウィンドウにのカーソル行にアンダーラインを引く
 augroup cch
   autocmd! cch
   autocmd WinLeave * set nocursorline
@@ -94,36 +102,29 @@ augroup END
 hi clear CursorLine
 hi CursorLine cterm=underline gui=underline
 
-" show invisible character format
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
-
-" do not stop BOL and EOL
-set whichwrap=b,s,h,l,<,>,[,]
-
-" tab setting
+" ソフトタブの設定
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
-" }}}
 
-" serach {{{
+
+"------------------------------------
+"" 検索
+"------------------------------------
 set noignorecase " ignore case-sensitivity
 set smartcase " if BOL is a capital letter, enable case-sensitivity
 set hlsearch
-" }}}
-
-" do not create buckup files
-set noundofile
 
 
-" neobundle {{{
+"------------------------------------
+"" NeoBundle
+"------------------------------------
 " https://github.com/Shougo/neobundle.vim
 if !1 | finish | endif
 
 if has('vim_starting')
   set nocompatible " be iMproved
-
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
@@ -150,8 +151,8 @@ NeoBundle 'Shougo/vimproc.vim', {
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'scrooloose/syntastic' " syntax check at save
-NeoBundle 'thinca/vim-quickrun' " \r
+NeoBundle 'scrooloose/syntastic' " 保存時にセーブ
+NeoBundle 'thinca/vim-quickrun' " \r で実行
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'derekwyatt/vim-scala'
@@ -164,27 +165,26 @@ NeoBundle 'AtsushiM/sass-compile.vim'
 
 call neobundle#end()
 filetype indent on
-" }}}
 
 
-" neocomplcache and neosnippet {{{
+"------------------------------------
+"" neocomplcache
+"------------------------------------
 " enable in start
 let g:neocomplcache_enable_at_startup = 1
 
 " neosnippet keymapping
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
-" }}}
 
 
-" unite {{{
-" unite prefix key.
-nnoremap [unite] <Nop>
-nmap f [unite]
-
-" unite general settings
+"------------------------------------
+"" unite
+"------------------------------------
+" 一般設定
 " インサートモードで開始
 let g:unite_enable_start_insert = 1
+
 " 最近開いたファイル履歴の保存数
 let g:unite_source_file_mru_limit = 50
 
@@ -195,21 +195,30 @@ let g:unite_source_file_mru_filename_format = ''
 let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
 
-" unite keymapping
-" 現在開いているファイルのディレクトリ下のファイル一覧。
+" uniteのkeymapping
+nnoremap [unite] <Nop>
+nmap f [unite]
+
+" 現在開いているファイルのディレクトリ下のファイル一覧
 " 開いていない場合はカレントディレクトリ
 nnoremap <silent> [unite]f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+
 " バッファ一覧
 nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
+
 " レジスタ一覧
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
+
 " 最近使用したファイル一覧
 nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
+
 " ブックマーク一覧
 nnoremap <silent> [unite]c :<C-u>Unite bookmark<CR>
+
 " ブックマークに追加
 nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
-" uniteを開いている間のキーマッピング
+
+" uniteを開いている間のkeymapping
 autocmd FileType unite call s:unite_my_settings()
 function! s:unite_my_settings()"{{{
     " ESCでuniteを終了
@@ -228,36 +237,33 @@ function! s:unite_my_settings()"{{{
     nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
     inoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
 endfunction"}}}
-" }}}
 
 
-" for coffeescript {{{
-au BufNewFile,BufRead *.coffee set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-au BufNewFile,BufRead *.html set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-" }}}
-
-" scrooloose/syntastic
+"------------------------------------
+"" scrooloose/syntastic
+"------------------------------------
 " http://superbrothers.hatenablog.com/entry/2012/03/04/155645
 let g:syntastic_mode_map = { 'mode': 'passive',
                            \ 'active_filetypes': ['javascript'],
                            \ 'passive_filetypes': [] }
-
 let g:syntastic_javascript_jslint_conf = "--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars"
 
-" AtsushiM/sass-compile.vim
-""{{{
-let g:sass_compile_auto = 0 " do not auto compile
-"}}}
 
-" mac setting {{{
+"------------------------------------
+"" AtsushiM/sass-compile.vim
+"------------------------------------
+" 自動コンパイルはしない
+let g:sass_compile_auto = 0
+
+"------------------------------------
+"" ローカルの設定
+"------------------------------------
+" mac
 if filereadable(expand('~/.vimrc.mac'))
   source ~/.vimrc.mac
 endif
-" }}}
 
-
-" local setting {{{
+" local
 if filereadable(expand('~/.vimrc.mine'))
   source ~/.vimrc.mine
 endif
-" }}}

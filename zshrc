@@ -1,16 +1,10 @@
-## Environment variable configuration
-#
 # LANG
-#
 export LANG=ja_JP.UTF-8
 
-
-## Default shell configuratioe
-#
-# set prompt
-# ${fg[...]} や $reset_color をロード
+# 色
 autoload -U colors; colors
 
+# 右にgitのブランチを出す
 function rprompt-git-current-branch {
     local name st color
 
@@ -40,7 +34,7 @@ function rprompt-git-current-branch {
 # プロンプトが表示されるたびにプロンプト文字列を評価、置換する
 setopt prompt_subst
 
-
+# プロンプト
 case ${UID} in
 0)
   # root
@@ -59,7 +53,7 @@ case ${UID} in
   ;;
 esac
 
-#enter で ls と git status
+# enter で ls と git status
 function do_enter() {
     if [ -n "$BUFFER" ]; then
         zle accept-line
@@ -101,39 +95,28 @@ function extract() {
 }
 alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 
-# auto change directory
-#
+# ディレクトリ名でcd
 setopt auto_cd
 
-# auto directory pushd that you can get dirs list by cd -[tab]
-#
+# cd -[tab] で補完
 setopt auto_pushd
 
-# command correct edition before each completion attempt
-#
+# command補正
 setopt correct
 
-# compacked complete list display
-#
+# 補完を候補を小さく
 setopt list_packed
 
-# no remove postfix slash of command line
-#
+# パス補完時にスラッシュをつける
 setopt noautoremoveslash
 
-# no beep sound when complete list displayed
-#
+# リストを出し終わったあとにビープ音を鳴らさない
 setopt nolistbeep
 
-## Keybind configuration
-#
-# emacs like keybind (e.x. Ctrl-a goes to head of a line and Ctrl-e goes
-# to end of it)
-#
+# emacsっぽいkeybind
 bindkey -e
 
-# historical backward/forward search with linehead string binded to ^P/^N
-#
+# ヒストリー関連
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
@@ -142,31 +125,23 @@ bindkey "^n" history-beginning-search-forward-end
 bindkey "\\ep" history-beginning-search-backward-end
 bindkey "\\en" history-beginning-search-forward-end
 
-## Command history configuration
-#
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt hist_ignore_dups # ignore duplication command history list
 setopt share_history # share command history data
 
-## Completion configuration
-#
-# for zsh-completions
+# zshの補完を強化
 # https://github.com/zsh-users/zsh-completions
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 autoload -Uz compinit
 compinit -u
 
-## Alias configuration
-#
-# expand aliases before completing
-#
-setopt complete_aliases # aliased ls needs if file/dir completions work
+# alias でも補完が効くようにする
+setopt complete_aliases
 
-# aliases
-#
+# alias
 alias where="command -v"
 alias j="jobs -l"
 alias la="ls -a"
@@ -191,18 +166,18 @@ linux*)
 esac
 
 # cd をしたときにlsを実行する
-#
 chpwd() { ls }
 
-## terminal configuration
-#
+# terminal 設定
+# 見直しの必要あり
 case "${TERM}" in
 screen)
     TERM=xterm
     ;;
 esac
 
-
+# ls の時の色設定
+# 見直しの必要あり
 unset LSCOLORS
 case "${TERM}" in
 xterm)
@@ -222,8 +197,6 @@ cons25)
   ;;
 esac
 
-# set terminal title including current directory
-#
 case "${TERM}" in
 kterm*|xterm*)
   precmd() {
@@ -236,10 +209,11 @@ kterm*|xterm*)
   ;;
 esac
 
+# これ何をしているのか忘れた
 preexec () {
   [ ${STY} ] && echo -ne "\ek${1%% *}\e\\"
 }
 
-## load user .zshrc configuration file
+# 環境ごとの設定を読み込む
 [ -f ~/.zshrc.mine ] && source ~/.zshrc.mine
 [ -f ~/.zshrc.mac ] && source ~/.zshrc.mac
