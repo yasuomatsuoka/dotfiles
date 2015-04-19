@@ -181,6 +181,7 @@ smap <C-k> <Plug>(neosnippet_expand_or_jump)
 "------------------------------------
 "" unite
 "------------------------------------
+" http://www.karakaram.com/unite
 " 一般設定
 " インサートモードで開始
 let g:unite_enable_start_insert = 1
