@@ -220,7 +220,7 @@ nnoremap <silent> [unite]a :<C-u>UniteBookmarkAdd<CR>
 
 " uniteを開いている間のkeymapping
 autocmd FileType unite call s:unite_my_settings()
-function! s:unite_my_settings()"{{{
+function! s:unite_my_settings() "{{{
     " ESCでuniteを終了
     nmap <buffer> <ESC> <Plug>(unite_exit)
     " 入力モードのときjjでノーマルモードに移動
@@ -236,7 +236,7 @@ function! s:unite_my_settings()"{{{
     " ctrl+oでその場所に開く
     nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
     inoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
-endfunction"}}}
+endfunction "}}}
 
 
 "------------------------------------
