@@ -4,54 +4,8 @@ export LANG=ja_JP.UTF-8
 # 色
 autoload -U colors; colors
 
-# 右にgitのブランチを出す
-function rprompt-git-current-branch {
-    local name st color
-
-    if [[ "$PWD" =~ '/\.git(/.*)?$' ]]; then
-        return
-    fi
-    name=$(basename "`git symbolic-ref HEAD 2> /dev/null`")
-    if [[ -z $name ]]; then
-        return
-    fi
-    st=`git status 2> /dev/null`
-    if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
-        color=${fg[green]}
-    elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
-        color=${fg[yellow]}
-    elif [[ -n `echo "$st" | grep "^# Untracked"` ]]; then
-        color=${fg_bold[red]}
-    else
-        color=${fg[red]}
-    fi
-
-    # %{...%} は囲まれた文字列がエスケープシーケンスであることを明示する
-    # これをしないと右プロンプトの位置がずれる
-    echo "%{$color%}$name%{$reset_color%} "
-}
-
 # プロンプトが表示されるたびにプロンプト文字列を評価、置換する
 setopt prompt_subst
-
-# プロンプト
-case ${UID} in
-0)
-  # root
-  PROMPT="%B%{${fg[red]}%}%/#%{${reset_color}%}%b "
-  SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
-  [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-    PROMPT="%{${fg[white]}%}${HOST%%.*} ${PROMPT}"
-  ;;
-*)
-  # norman user
-  PROMPT="%m%% "
-  RPROMPT='[`rprompt-git-current-branch`%~]'
-  SPROMPT="%r is correct? [n,y,a,e]:%{${reset_color}%} "
-  [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-    PROMPT="%{${fg[white]}%}%n ${HOST%%.*}%% "
-  ;;
-esac
 
 # enter で ls と git status
 function do_enter() {
@@ -61,7 +15,7 @@ function do_enter() {
     fi
     echo
     ls
-    # ↓おすすめ
+    # おすすめ
     # ls_abbrev
     if [ "$(git rev-parse --is-inside-work-tree 2> /dev/null)" = 'true' ]; then
         echo
@@ -176,44 +130,32 @@ screen)
     ;;
 esac
 
-# ls の時の色設定
-# 見直しの必要あり
-unset LSCOLORS
-case "${TERM}" in
-xterm)
-  export TERM=xterm-color
-  ;;
-kterm)
-  export TERM=kterm-color
-  # set BackSpace control character
-  stty erase
-  ;;
-cons25)
-  unset LANG
-  export LSCOLORS=HxFxCxdxBxegedabagacad
-  export LS_COLORS='di=39:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-  zstyle ':completion:*' list-colors \
-    'di=;37;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
-  ;;
-esac
 
-case "${TERM}" in
-kterm*|xterm*)
-  precmd() {
-    echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
-  }
-  export LSCOLORS=Hxfxcxdxbxegedabagacad #mac bsd
-  export LS_COLORS='di=39:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-  zstyle ':completion:*' list-colors \
-    'di=37;1' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34' #tab 保管時の挙動
-  ;;
-esac
+# load zgen
+source "${HOME}/.zgen/zgen.zsh"
 
-# これ何をしているのか忘れた
-preexec () {
-  [ ${STY} ] && echo -ne "\ek${1%% *}\e\\"
-}
+# if the init scipt doesn't exist
+if ! zgen saved; then
+    echo "Creating a zgen save"
 
-# 環境ごとの設定を読み込む
-[ -f ~/.zshrc.mine ] && source ~/.zshrc.mine
-[ -f ~/.zshrc.mac ] && source ~/.zshrc.mac
+    zgen oh-my-zsh
+
+    # plugins
+    zgen oh-my-zsh plugins/git
+    zgen oh-my-zsh plugins/command-not-found
+
+    zgen load zsh-users/zsh-syntax-highlighting
+    zgen load zsh-users/zsh-completions src
+
+    # theme
+    zgen oh-my-zsh themes/miloshadzic
+
+    # save all to init script
+    zgen save
+fi
+
+# 分割した設定ファイルの読み込む
+[ -f ~/.zsh/mac ] && source ~/.zsh/mac
+[ -f ~/.zsh/tmux ] && source ~/.zsh/tmux
+[ -f ~/.zsh/ghq ] && source ~/.zsh/ghq
+[ -f ~/.zsh/mine ] && source ~/.zsh/mine

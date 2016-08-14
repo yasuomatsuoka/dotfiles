@@ -88,25 +88,34 @@ colorscheme desert
 set wrap " 行末で折り返す
 set showmatch " 対応するかっこを光らせる
 
+" フォーカスがあたっているウィンドウにのカーソル行にアンダーラインを引く
+augroup cch
+	  autocmd! cch
+	    autocmd WinLeave * set nocursorline
+	      autocmd WinEnter,BufRead * set cursorline
+      augroup END
+      hi clear CursorLine
+      hi CursorLine cterm=underline gui=underline
+
 " 見えない文字を見えるように
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 highlight ZenkakuSpace ctermfg=lightblue guibg=darkgray
 match ZenkakuSpace /　/
 
-" フォーカスがあたっているウィンドウにのカーソル行にアンダーラインを引く
-augroup cch
-  autocmd! cch
-  autocmd WinLeave * set nocursorline
-  autocmd WinEnter,BufRead * set cursorline
-augroup END
-hi clear CursorLine
-hi CursorLine cterm=underline gui=underline
-
-" ソフトタブの設定
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
+" " フォーカスがあたっているウィンドウにのカーソル行にアンダーラインを引く
+" augroup cch
+"   autocmd! cch
+"   autocmd WinLeave * set nocursorline
+"   autocmd WinEnter,BufRead * set cursorline
+" augroup END
+" hi clear CursorLine
+" hi CursorLine cterm=underline gui=underline
+" 
+" " ソフトタブの設定
+" set tabstop=4
+" set softtabstop=4
+" set shiftwidth=4
+" set expandtab
 
 
 "------------------------------------
@@ -151,7 +160,6 @@ NeoBundle 'Shougo/vimproc.vim', {
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neosnippet'
 NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'scrooloose/syntastic' " 保存時にセーブ
 NeoBundle 'thinca/vim-quickrun' " \r で実行
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
@@ -161,7 +169,6 @@ NeoBundle 'leafgarland/typescript-vim'
 NeoBundle 'evidens/vim-twig'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'mattn/emmet-vim'
-NeoBundle 'AtsushiM/sass-compile.vim'
 
 call neobundle#end()
 filetype indent on
