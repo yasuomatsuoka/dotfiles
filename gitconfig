@@ -1,0 +1,14 @@
+[user]
+    name = yasuo.matsuoka
+    email = ysomtok@gmail.com
+[core]
+    editor = vim
+    excludesfile = /Users/yasuo.matsuoka/.gitignore
+[color]
+    ui = auto
+[alias]
+    st = status
+    cm = commit
+    difff = diff --word-diff
+[ghq]
+    root = ~/src
