@@ -73,3 +73,10 @@ $ ln -s /Users/yasuo/src/github.com/yasuomatsuoka/dotfiles/tmxu.conf /Users/yasu
 $ ln -s /Users/yasuo/dotfiles/gitignore /Users/yasuo/.gitignore
 $ exit
 ```
+
+- system preference でいじれない設定
+```
+$ defaults write -g ApplePressAndHoldEnabled -bool false # key repeat できるようにする
+$ defaults write -g InitialKeyRepeat -int 10 # system preference での最小値 15 (225 ms)
+$ defaults write -g KeyRepeat -int 1 # system preference　での最小値 2 (30 ms)
+```

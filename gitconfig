@@ -3,7 +3,7 @@
     email = ysomtok@gmail.com
 [core]
     editor = vim
-    excludesfile = /Users/yasuo.matsuoka/.gitignore
+    excludesfile = /Users/yasuo/.gitignore
 [color]
     ui = auto
 [alias]
