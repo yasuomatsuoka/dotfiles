@@ -119,6 +119,8 @@ linux*)
   ;;
 esac
 
+alias docker-login='(){ docker exec -it $1 bash -lc "su - $2" }'
+
 # cd をしたときにlsを実行する
 chpwd() { ls }
 
