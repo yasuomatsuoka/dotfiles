@@ -133,24 +133,23 @@ screen)
 esac
 
 
+# for pure prompt
+PURE_GIT_PULL=0
+PURE_PROMPT_SYMBOL="$"
+
 # load zgen
 source "${HOME}/.zgen/zgen.zsh"
 
 # if the init scipt doesn't exist
 if ! zgen saved; then
     echo "Creating a zgen save"
-
-    zgen oh-my-zsh
-
-    # plugins
-    zgen oh-my-zsh plugins/git
-    zgen oh-my-zsh plugins/command-not-found
-
-    zgen load zsh-users/zsh-syntax-highlighting
-    zgen load zsh-users/zsh-completions src
+    zgen load zsh-users/zsh-completions
+    zgen load b4b4r07/auto-fu.zsh
+    zgen load rupa/z
+    zgen load mafredri/zsh-async
 
     # theme
-    zgen oh-my-zsh themes/miloshadzic
+    zgen load sindresorhus/pure
 
     # save all to init script
     zgen save
