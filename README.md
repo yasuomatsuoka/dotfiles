@@ -84,6 +84,7 @@ $ exit
 $ defaults write -g ApplePressAndHoldEnabled -bool false # key repeat できるようにする
 $ defaults write -g InitialKeyRepeat -int 10 # system preference での最小値 15 (225 ms)
 $ defaults write -g KeyRepeat -int 2 # system preference　での最小値 2 (30 ms)
+$ defaults write com.apple.dock no-bouncing -bool true # アプリを通知でバウンスさせない
 ```
 
 - ricty font のインストール
