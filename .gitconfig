@@ -12,7 +12,7 @@
 
 # 会社のコードをいじるときは会社のgitconfig設定を使う
 [includeIf "gitdir:特定のディレクトリ"]
-  path = ~/.gitconfig-work
+  path = ~/.gitconfig-office
 
 # otherフォルダの時は個人用アカウントを使用する
 [includeIf "gitdir:~/src/github.com/yasuomatsuoka/"]
