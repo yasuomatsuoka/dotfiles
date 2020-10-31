@@ -1,0 +1,4 @@
+" macvim
+set mouse=h
+set ttymouse=xterm2
+set noundofile

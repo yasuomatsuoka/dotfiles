@@ -1,0 +1,19 @@
+[core]
+    editor = vim
+    excludesfile = /Users/yasuo/.gitignore
+[color]
+    ui = auto
+[alias]
+    st = status
+    cm = commit
+    difff = diff --word-diff
+[ghq]
+    root = ~/src
+
+# 会社のコードをいじるときは会社のgitconfig設定を使う
+[includeIf "gitdir:特定のディレクトリ"]
+  path = ~/.gitconfig-work
+
+# otherフォルダの時は個人用アカウントを使用する
+[includeIf "gitdir:~/src/github.com/yasuomatsuoka/"]
+  path = ~/.gitconfig-private
