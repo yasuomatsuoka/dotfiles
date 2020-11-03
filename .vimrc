@@ -27,9 +27,6 @@ inoremap <C-b> <Left>
 " ハイライトを消すkeymapping
 noremap <ESC><ESC> :nohlsearch<CR><ESC>
 
-" ctagのpop
-nnoremap <C-[> :pop<CR>
-
 
 "------------------------------------
 "" タブ
@@ -102,21 +99,6 @@ set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 highlight ZenkakuSpace ctermfg=lightblue guibg=darkgray
 match ZenkakuSpace /　/
 
-" " フォーカスがあたっているウィンドウにのカーソル行にアンダーラインを引く
-" augroup cch
-"   autocmd! cch
-"   autocmd WinLeave * set nocursorline
-"   autocmd WinEnter,BufRead * set cursorline
-" augroup END
-" hi clear CursorLine
-" hi CursorLine cterm=underline gui=underline
-" 
-" " ソフトタブの設定
-" set tabstop=4
-" set softtabstop=4
-" set shiftwidth=4
-" set expandtab
-
 
 "------------------------------------
 "" 検索
@@ -146,29 +128,9 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim' " Unite file_mru
-NeoBundle 'Shougo/vimproc.vim', {
- \ 'build' : {
- \     'windows' : 'tools\\update-dll-mingw',
- \     'cygwin' : 'make -f make_cygwin.mak',
- \     'mac' : 'make -f make_mac.mak',
- \     'linux' : 'make',
- \     'unix' : 'gmake',
- \    },
- \ }
 
 call neobundle#end()
 filetype indent on
-
-
-"------------------------------------
-"" neocomplcache
-"------------------------------------
-" enable in start
-let g:neocomplcache_enable_at_startup = 1
-
-" neosnippet keymapping
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
 
 
 "------------------------------------
@@ -232,22 +194,6 @@ function! s:unite_my_settings() "{{{
     inoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
 endfunction "}}}
 
-
-"------------------------------------
-"" scrooloose/syntastic
-"------------------------------------
-" http://superbrothers.hatenablog.com/entry/2012/03/04/155645
-let g:syntastic_mode_map = { 'mode': 'passive',
-                           \ 'active_filetypes': ['javascript'],
-                           \ 'passive_filetypes': [] }
-let g:syntastic_javascript_jslint_conf = "--white --undef --nomen --regexp --plusplus --bitwise --newcap --sloppy --vars"
-
-
-"------------------------------------
-"" AtsushiM/sass-compile.vim
-"------------------------------------
-" 自動コンパイルはしない
-let g:sass_compile_auto = 0
 
 "------------------------------------
 "" ローカルの設定

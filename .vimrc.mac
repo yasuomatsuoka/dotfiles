@@ -1,4 +1,4 @@
-" macvim
+" macvimの設定
 set mouse=h
 set ttymouse=xterm2
 set noundofile

@@ -1,4 +1,5 @@
- if has('gui_macvim')
+" GUI版vimの設定
+if has('gui_macvim')
     set guifont=Monaco:h16
     colorscheme torte
     set transparency=25	" 透明度を指定
